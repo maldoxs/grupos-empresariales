@@ -1,0 +1,42 @@
+Using Autonomous Database Graph Client
+======================================
+
+You can connect to your Autonomous Database instance by using AdbClient. You can provide the connection details via a configuration object as illustrated in the following example::
+
+   from opg4py.adb import AdbClient
+
+   config = {
+       'tenant': '<tenant_OCID>',
+       'database': '<DB_name>',
+       'username': 'ADBDEV',
+       'password': '<password_for_ADBDEV>',
+       'endpoint': 'https://<hostname-prefix>.adb.<region>.oraclecloudapps.com/'
+   }
+
+   client = AdbClient(config)
+   client.__enter__()
+
+Once connected you can start the PGX server environment with the desired memory as illustrated in the following example::
+
+   memory_gb = 8
+   job = client.start_environment(memory_gb)
+   job.get()
+
+Above will submit a job in Graph Studio for environment creation. However, you can skip this step if the environment is already running. You can always verify if the environment has started successfully by using the following method, which will return True when environment is already running and False otherwise::
+
+   client.is_attached()
+
+Once the environment hast started successfully you can create an instance and a session object as illustrated in the following example::
+
+   instance = client.get_pgx_instance()
+   session = instance.create_session("adb-session")
+
+You can proceed with usual operations as loading a graph, executing algorithms, running PGQL queries and more. Do not forget to close the session after all operations are finished, as illustrated in the following example::
+
+   ...
+   graph = session.create_graph_builder().add_edge(1, 2).add_edge(2, 3).add_edge(3, 1).build()
+   analyst = session.create_analyst()
+   triangles = analyst.count_triangles(graph, True)
+   ...
+
+   session.close()

@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>5. Using Autonomous Database Graph Client &mdash; OPG4Py 22.3.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="OPG4Py package" href="../index.html" />
+    <link rel="prev" title="4. Retrieving PGQL-on-RDBMS results" href="pgql_result_set.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> OPG4Py
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../index_tables.html">Indices and tables</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Using OPG4Py</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pgql_connection.html">1. Connecting using PGQL-on-RDBMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pgql_statement.html">2. Creating a PGQL-on-RDBMS statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pgql_sql_translation.html">3. Translating PGQL queries to SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pgql_result_set.html">4. Retrieving PGQL-on-RDBMS results</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5. Using Autonomous Database Graph Client</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">OPG4Py package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pypgx/detailed/index.html">Using PyPGX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pypgx/index.html">PyPGX package</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OPG4Py</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Using OPG4Py</a> &raquo;</li>
+        
+      <li><span class="section-number">5. </span>Using Autonomous Database Graph Client</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/opg4py/detailed/adb_client.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-autonomous-database-graph-client">
+<h1><span class="section-number">5. </span>Using Autonomous Database Graph Client<a class="headerlink" href="#using-autonomous-database-graph-client" title="Permalink to this heading">¶</a></h1>
+<p>You can connect to your Autonomous Database instance by using AdbClient. You can provide the connection details via a configuration object as illustrated in the following example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">opg4py.adb</span> <span class="kn">import</span> <span class="n">AdbClient</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;tenant&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;tenant_OCID&gt;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;database&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;DB_name&gt;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;ADBDEV&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;password_for_ADBDEV&gt;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;endpoint&#39;</span><span class="p">:</span> <span class="s1">&#39;https://&lt;hostname-prefix&gt;.adb.&lt;region&gt;.oraclecloudapps.com/&#39;</span>
+<span class="p">}</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">AdbClient</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="fm">__enter__</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Once connected you can start the PGX server environment with the desired memory as illustrated in the following example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">memory_gb</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">start_environment</span><span class="p">(</span><span class="n">memory_gb</span><span class="p">)</span>
+<span class="n">job</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Above will submit a job in Graph Studio for environment creation. However, you can skip this step if the environment is already running. You can always verify if the environment has started successfully by using the following method, which will return True when environment is already running and False otherwise:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">is_attached</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Once the environment hast started successfully you can create an instance and a session object as illustrated in the following example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">instance</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_pgx_instance</span><span class="p">()</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">create_session</span><span class="p">(</span><span class="s2">&quot;adb-session&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can proceed with usual operations as loading a graph, executing algorithms, running PGQL queries and more. Do not forget to close the session after all operations are finished, as illustrated in the following example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">create_graph_builder</span><span class="p">()</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+<span class="n">analyst</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">create_analyst</span><span class="p">()</span>
+<span class="n">triangles</span> <span class="o">=</span> <span class="n">analyst</span><span class="o">.</span><span class="n">count_triangles</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="o">...</span>
+
+<span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../index.html" class="btn btn-neutral float-right" title="OPG4Py package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pgql_result_set.html" class="btn btn-neutral float-left" title="4. Retrieving PGQL-on-RDBMS results" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2022, Oracle.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
