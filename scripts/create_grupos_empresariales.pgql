@@ -1,0 +1,27 @@
+/*
+ * =====================================================================
+ *create_grupos_empresariales.pgql
+ * SCRIPT DE CREACIÓN DEL PROPERTY GRAPH "GRUPOS_EMPRESARIALES"
+ * Versión final, asimilando la estructura del modelo HR_BE que sí funciona.
+ * =====================================================================
+ */
+CREATE PROPERTY GRAPH GRUPOS_EMPRESARIALES
+  /*
+   * DEFINICIÓN DE VÉRTICES (NODOS)
+   */
+  VERTEX TABLES (
+    CONTRIBUYENTES
+      KEY (RUT)
+      LABEL CONTRIBUYENTE
+      PROPERTIES (RUT, RAZON_SOCIAL, TIPO_PERSONA, SUBTIPO, ES_VIGENTE, TAMANO_EMPRESA, CLASIFICACION_RIESGO, GRUPO_DECLARADO)
+  )
+  /*
+   * DEFINICIÓN DE ARISTAS (ARCOS)
+   */
+  EDGE TABLES (
+    RELACIONES_SOCIETARIAS AS POSEE
+      SOURCE KEY (RUT_SOCIO) REFERENCES CONTRIBUYENTES(RUT)
+      DESTINATION KEY (RUT_SOCIEDAD) REFERENCES CONTRIBUYENTES(RUT)
+      LABEL POSEE
+      PROPERTIES (PORCENTAJE_PARTICIPACION, FUENTE_INFORMACION, PERIODO_RELACION)
+  )
