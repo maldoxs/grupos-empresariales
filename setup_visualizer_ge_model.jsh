@@ -26,8 +26,9 @@ Supplier<GraphConfig> pgxConfigSupplier = () -> {
       .setPassword("sii#2024")
       .setName("GE_TEST_GRAPH")
       // Vértices (ajusta a tus labels/columnas reales en el DDL/vistas):
-      .addVertexProperty("CODIGO",                 PropertyType.LONG)
+      .addVertexProperty("CODIGO",                PropertyType.LONG)
       .addVertexProperty("GEMP_NOMBRE",           PropertyType.STRING)
+      .addVertexProperty("GEMP_INFO_GENERAL",     PropertyType.STRING)
       .addVertexProperty("GEMP_VERSION_VIGENTE",  PropertyType.INTEGER)
       .addVertexProperty("GEMP_FECHA_CREACION",   PropertyType.TIMESTAMP)
       .addVertexProperty("GEMP_FECHA_MODIFICACION", PropertyType.TIMESTAMP)
